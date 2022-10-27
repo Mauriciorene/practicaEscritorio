@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.sql.Date;
 /**
  *
  * @author Mauricio Rubio
@@ -16,6 +17,24 @@ public class Autor {
     private String nombres;
     private String Apellidos;
     private String email;
-    private String fechaNac;
+    private Date fechaNac;
     
+    public Autor(int id_autor, String cedula, String nombres, String Apellidos,
+            String email, Date fechanac) {
+        this.id_autor = id_autor;
+        this.cedula = cedula;
+        this.nombres = nombres;
+        this.Apellidos = Apellidos;
+        this.email = email;
+        this.fechaNac = fechaNac;
+    }
+    
+    public Autor(String cedula, String nombres, String Apellidos, String email,
+            Date fechaNac) {
+        this.cedula = cedula;
+        this.nombres = nombres;
+        this.Apellidos = Apellidos;
+        this.email = email;
+        this.fechaNac = fechaNac;     
+    }
 }
