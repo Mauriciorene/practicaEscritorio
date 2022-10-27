@@ -11,4 +11,11 @@ package Modelo;
  */
 public class Autor {
     
+    private int id_autor;
+    private String cedula;
+    private String nombres;
+    private String Apellidos;
+    private String email;
+    private String fechaNac;
+    
 }
