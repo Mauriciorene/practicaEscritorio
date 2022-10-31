@@ -26,6 +26,8 @@ public class DataBase {
         }catch(SQLException e){
             System.out.println("Error de Conexión");
             e.printStackTrace();
+        }
+    }    
             
         //Método para actualizar datos en la BD
         public int Actualizar(String consulta) {
@@ -38,5 +40,40 @@ public class DataBase {
         }
         return 0;
                
+    }
+        
+private List OrganizarDatos (ResultSet rs){
+    List filas=new ArrayList(); //Arreglo de elementos
+    try{
+        
+        int numColumnas=rs.getMetaData() .getColumnCount();
+        while(rs.next()) { //Recorre cada registro de la tabla
+            Map<String, Object> renglon=new HashMap();
+            for (int i=1; i<=numColumnas; i++){
+                //se obtine nombre  de campo en la BD
+                String nombreCampo=rs.getMetaData() .getColumnName(i);
+                Object valor=rs.getObject(nombreCampo);
+                //Por cada campo, se obtiene el nombre y el valor del mismo
+                renglon.put(nombreCampo,valor);
+            }
+            filas.add(renglon);//se agrega al arreglo cada registro
+        }   
+    }catch(SQLException e){
+        e.printStackTrace();
+    }
+    return filas;
+    
+    public List Listar(String consulta){
+        ResultSet rs=null;
+        List rresultado=new ArrayList();
+        try{
+            Statement st=conexion.createStatement();
+            rs=st.executeQuery(consulta);
+            resultado=OrganizarDatos(rs);
+            
+        }catch(SQLException e){
+            System.out.println("No se realizó la consulta");
+            e.printStackTrace();
+        }
     }
 }
