@@ -65,7 +65,7 @@ private List OrganizarDatos (ResultSet rs){
     
     public List Listar(String consulta){
         ResultSet rs=null;
-        List rresultado=new ArrayList();
+        List resultado=new ArrayList();
         try{
             Statement st=conexion.createStatement();
             rs=st.executeQuery(consulta);
@@ -75,5 +75,16 @@ private List OrganizarDatos (ResultSet rs){
             System.out.println("No se realizó la consulta");
             e.printStackTrace();
         }
+        return resultado;
+    
+    public boolean ejecutarProcedimento (string nombre){
+        try{
+            CallableStatement cs=conexion.prepareCall("{call"+nombre+"}");
+            return cs.execute();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }
