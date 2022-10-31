@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 import java.sql.*;
@@ -62,7 +57,8 @@ private List OrganizarDatos (ResultSet rs){
         e.printStackTrace();
     }
     return filas;
-    
+}
+
     public List Listar(String consulta){
         ResultSet rs=null;
         List resultado=new ArrayList();
@@ -76,8 +72,9 @@ private List OrganizarDatos (ResultSet rs){
             e.printStackTrace();
         }
         return resultado;
+}
     
-    public boolean ejecutarProcedimento (string nombre){
+    public boolean ejecutarProcedimento (String nombre){
         try{
             CallableStatement cs=conexion.prepareCall("{call"+nombre+"}");
             return cs.execute();
@@ -86,5 +83,13 @@ private List OrganizarDatos (ResultSet rs){
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public void cerrarConexion(){
+        try{
+            conexion.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
