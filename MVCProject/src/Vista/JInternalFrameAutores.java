@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Mauricio Rubio
+ //@author Mauricio Rubio
  */
 public class JInternalFrameAutores extends javax.swing.JInternalFrame {   
     
@@ -17,9 +17,9 @@ public class JInternalFrameAutores extends javax.swing.JInternalFrame {
         jTextIdAutor.setEnabled(false); //Deshabilitar campo de IdAutor
     }
 
-// Definir lista de autores
+
         private void limpiarCampos() {
-        this.jTextField1.setText("");
+        this.jTextIdAutor.setText("");
         this.jTextField2.setText("");
         this.jTextField3.setText("");
         this.jTextField4.setText("");
