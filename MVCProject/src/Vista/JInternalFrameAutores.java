@@ -25,6 +25,118 @@ public class JInternalFrameAutores extends javax.swing.JInternalFrame {
         this.jTextField4.setText("");
         this.jTextField5.setText("");
     }
+        
+    //Método para listar datos dentro de la tabla
+    public void obtenerDatos(){
+        //se crea una lista que almacena los datos obtenidos
+        List<Autor> autores=new DAOAutor().ObtenerDatos();
+        //Define un medelo para la tabla
+        DefaultTableModel modelo= new DefaultTableModel ();
+        //Arreglo con nombre de columnas de la tabla
+        String[] columnas={"id_autor","Nombres", "Apellidos",
+            "Email","Cédula", "FechaNac"};
+        //Establece los nombres definidos de las columnas
+        modelo.setColumnIdentifiers(columnas);
+        for(Autor au:autores) { //Recorre cada elemento de la lista y los agrega
+            //al medelo de la tabla
+            String[]renglon={Integer.toString(au.getId_autor()) ,au.getCedula(),
+                au.getNombres(),au.getApellidos(), au.getEmail(),
+                au.getFechaNac().toString()};
+                modelo.addRow(renglon);
+            }        
+            jTableAutor.setModel(modelo); //Ubica los datos del modelo en la tabla
+        }
+        
+        private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {
+            //captura datos de la cajas de texto
+            String nomb=jTextNombres.getText();
+            String apell=jTextApellidos.getText();
+            String ema=jTextEmail.getText();
+            String ced=jTextCedula.getText();
+            String fecN=jTextFechaNac.getText();
+            //Comprueva que las cajas de texto no esten vacías
+            if(nomb.contentEquals("")||apell.comtentEquals("")||
+                ema.contentEquals("")||ced.contentEquals("")||
+                fecN.contentEquals("")){
+                JOptinPane.showMessageDialog(rootPane,
+                       "Todos los campos son obligatorios");
+            }else{
+                try{
+                    //Convierte de String a Date
+                    Date fech=Date.valueOf(fecN);//Usar formato de fecha: yyy-mm-dd
+                    //Objeto para acceder al método Insertar de DAOAutor
+                    Autor au=new DAOAutor().Insertar(ced, nomb, apell, ema, fech);
+                    JOptionPane.showMessageDialog(rootPane, "Registro agregado");
+                }catch (Exceotion e){
+                    e.printStackTrace();
+                    JOptionpane.showMessageDialog(rootPane, "No se agredó el registro");
+                }
+            }
+            obtenerDatos(); //llama a este método para que se muestre el nuevo
+            //registro en la tabla del formulario
+            limpiarCampos();
+        }
+        
+    private void JBactualizarActionPerformed(java.awt.event.ActionEvent evt) {
+        actualizarAutor();
+        obtenerDatos();
+        limpiarCampos();
+    }
+    
+    private void jBBorraactionPerformed(java.awt.event.ActionEvent evt) {
+        int fila=this.jTableroautor.getSelctedRow();
+        if(fila==-1){
+            JOptionpane.showmessageDialog(rootPane,"Seleccione un registro de la tabla");
+        }
+        else{
+            int id=Integer.parseInt((String)this.jtableAutor.getValueAt(fila, 0).toString());
+            DAOAutor dao=new DAOAutor();
+            dao.Eliminar(id);
+            obtenerDatos();
+        }
+    }
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {
+            int fila=this.jTableAutor.getSelectedRow(); //Se obtiene #fila seleccionado
+            if(fila==-1){
+                JOptionPane.showMessageDialog(rootPane, "Selccione un registro de la tabla");
+            }
+            else{ //Se toma cada campo de la tabla del registro seleccionado
+                // y se asigna a una variable
+                try{
+                int id=Integer.parseInt((String)this.jTableAutor.getvalueAt(fila, 0).toString());
+                String nom=(String)this.jTableAutor.getValueAt(fila,1);
+                String ape=(String)this.jTableAutor.getValueAt(fila,2);
+                String corr=(String)this.jTableAutor.getValueAt(fila,3);
+                String ced=(String)this.jTableAutor.getValueAt(fila,4);
+                Date fec=Date.valueOf((String)this.jTableAutor.getvalueAt(fila,5).toString());
+                //se ubican en las cajas de textos los datos capturados de la tabla
+                jTextIdAutor.setText(""+id);
+                jTextNombres.setText(nom);
+                jTextApellidos.setText(ape);
+                jTextEmail.setText(corr);
+                jTextCedula.setText(ced);
+                jTextIdAutor.setText(String.valueOf(fec));
+                }catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
+            }
+        public void actualizarAutor(){
+                int id=Integer.parseInt(this.jTextIdAutor.getText());
+                String nom=this.jTextNombres.getText();
+                String ape=this.jTextApellidos.getText();
+                String corr=this.jTextEmail.getText();
+                String ced=this.jTextCedula.getText();
+                Date fec=Date.valueOf(this.jTextFechaNac.getText());
+                
+                DAOAutor dao.Actualizar(id,nom,ape,corr,ced,fec);
+                if(res==1){
+                    JOptionPane.showMessageDialog(rootPane, "¡Autor Actualizado!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+                }
+            }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
