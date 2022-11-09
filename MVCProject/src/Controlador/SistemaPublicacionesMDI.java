@@ -17,7 +17,14 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
         setTitle("Publicaciones"); //Agrega titulo al MDI
         Autores= new JInternalFrameAutores();//
         
-        //Agrega
+        //Agrega los JInternalFrame | Al desktopane del MDI
+        desktopPane,add(Autores);
+    }
+    
+    private void verAutorMenuItemActionPerformed(java.awt.event.ActionEvent evet) {
+        //Llama al método obtenerDatos para mostrarlos en la tabla del formulario
+        Autores.obtenerDatos();
+        Autores.setVisible(true);//Muestra el formulario JInternalFrameAutores
     }
 
     /**
