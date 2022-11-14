@@ -1,5 +1,6 @@
 package Controlador;
 import Vista.*;
+import javax.swing.JDesktopPane;
 
 /**
  *
@@ -7,7 +8,7 @@ import Vista.*;
  */
 public class SistemaPublicacionesMDI extends javax.swing.JFrame {
     
-        private JInternalFrameAutores Autores; //objeto Formulario Autores
+        private JInternalFrameAutores_1 Autores; //objeto Formulario Autores
 
     /**
      * Creates new form SistemaPublicacionesMDI
@@ -15,10 +16,10 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
     public SistemaPublicacionesMDI() {
         initComponents();
         setTitle("Publicaciones"); //Agrega titulo al MDI
-        Autores= new JInternalFrameAutores();//
-        
-        //Agrega los JInternalFrame | Al desktopane del MDI
-        desktopPane,add(Autores);
+        Autores= new JInternalFrameAutores_1();//
+           //Agrega los JInternalFrame | Al desktopane del MDI
+            JDesktopPane desktopPane1 = desktopPane;
+add(Autores);
     }
     
     private void verAutorMenuItemActionPerformed(java.awt.event.ActionEvent evet) {
@@ -45,9 +46,6 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -82,23 +80,11 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        editMenu.setText("Autor");
 
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
+        cutMenuItem.setText("Ver Autores");
         editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
@@ -173,9 +159,7 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
@@ -183,7 +167,6 @@ public class SistemaPublicacionesMDI extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
